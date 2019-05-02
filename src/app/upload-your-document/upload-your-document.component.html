@@ -1,0 +1,17 @@
+<section [hidden]="!hiddenCamera" fxLayout="row" fxLayoutAlign="space-around center" style="margin-bottom: 2rem">
+ <mat-radio-group [value]="overlaySize" (change)="onChangeOverlaySize($event.value)">
+  <mat-radio-button value="M" style="margin-right: 1rem">Medium</mat-radio-button>
+  <mat-radio-button value="L">Large</mat-radio-button>
+</mat-radio-group>
+</section>
+<section [hidden]="!hiddenCamera" fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button color="primary" (click)="openCamera()">Take Snapshot</button>
+</section>
+<section *ngIf="stream">
+  <h3>OS: {{stream.os}}</h3>
+  <h4>Browser: {{stream.browser}}</h4>
+  <h5>Resolucion: {{stream.resolution}}</h5>
+  <h5>Tamaño: {{stream.size}}</h5>
+  <img [src]="stream.data" width="300px" height="250px"/>
+</section>
+<app-camera [hidden]="hiddenCamera" #appCamera [overlaySize]="overlaySize" (capture)="loadCaptureStream($event)"></app-camera>
